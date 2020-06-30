@@ -6,8 +6,12 @@ import pygame
 # Game screen
 screen = pygame.display.set_mode((width, height))
 
-# Window title
+# Set window title
 pygame.display.set_caption("Meteoraid")
+
+# Set window game icon
+gameIcon = pygame.image.load("assets/icon.png")
+pygame.display.set_icon(gameIcon)
 
 # Loop
 running = True
