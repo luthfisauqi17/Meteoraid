@@ -26,6 +26,7 @@ playerXChange = 0
 targetImg = pygame.image.load("assets/target.png")
 targetX = random.randint(0,735)
 targetY = random.randint(50, 150)
+targetYChange = 1
 
 
 # Functions
@@ -73,6 +74,7 @@ while running:
     player(playerX, playerY)
 
     # Target move update
+    targetY += targetYChange
     target(targetX, targetY)
 
     # Update screen
