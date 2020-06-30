@@ -64,6 +64,12 @@ while running:
 
     # Player move update
     playerX += playerXChange
+
+    if playerX <= 0:
+      playerX = 0
+    elif playerX >= 736:
+      playerX = 736
+
     player(playerX, playerY)
 
     # Target move update
