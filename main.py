@@ -27,12 +27,12 @@ targetImg = []
 targetX = []
 targetY = []
 targetYChange = []
-numOfTarget = 7
+numOfTarget = 3
 
 for i in range(numOfTarget):
   targetImg.append(pygame.image.load("assets/target.png"))
-  targetX.append(random.randint(0,735))
-  targetY.append(random.randint(50, 150))
+  targetX.append(random.randint(0, 735))
+  targetY.append(random.randint(25, 150))
   targetYChange.append(1)
 
 
@@ -42,6 +42,7 @@ for i in range(numOfTarget):
 
 def player(x, y):
   screen.blit(playerImg, (x, y))
+
 
 def target(x, y, i):
   screen.blit(targetImg[i], (x, y))
@@ -65,7 +66,7 @@ while running:
             playerXChange = -playerXSpeed
           if event.key == pygame.K_RIGHT:
             playerXChange = playerXSpeed
-          
+
         if event.type == pygame.KEYUP:
           if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
             playerXChange = 0
@@ -84,6 +85,11 @@ while running:
 
     for i in range(numOfTarget):
       targetY[i] += targetYChange[i]
+
+      if targetY[i] >= 600:
+        targetX[i] = random.randint(0,735)
+        targetY[i] = random.randint(25, 150)
+
       target(targetX[i], targetY[i], i)
 
     # Update screen
