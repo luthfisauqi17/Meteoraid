@@ -40,8 +40,9 @@ for i in range(numOfTarget):
 
 # Bullet
 bulletImg = pygame.image.load("assets/bullet.png")
-bulletX = playerX
+bulletX = 0
 bulletY = playerY
+bulletYChange = 3
 bulletState = "ready"
 
 
@@ -82,7 +83,9 @@ while running:
             if event.key == pygame.K_RIGHT:
                 playerXChange = playerXSpeed
             if event.key == pygame.K_SPACE:
-                fireBullet(bulletX, bulletY)
+                if bulletState is "ready":
+                    bulletX = playerX
+                    fireBullet(bulletX, bulletY)
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -99,7 +102,6 @@ while running:
     player(playerX, playerY)
 
     # Target move update
-
     for i in range(numOfTarget):
         targetY[i] += targetYChange[i]
 
@@ -108,6 +110,15 @@ while running:
             targetY[i] = random.randint(25, 150)
 
         target(targetX[i], targetY[i], i)
+
+    # Bullet move update
+    if bulletY <= 0:
+        bulletY = playerY
+        bulletState = "ready"
+
+    if bulletState is "fire":
+        fireBullet(bulletX, bulletY)
+        bulletY -= bulletYChange
 
     # Update screen
     pygame.display.update()
