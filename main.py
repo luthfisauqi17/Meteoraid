@@ -38,6 +38,12 @@ for i in range(numOfTarget):
     targetY.append(random.randint(25, 150))
     targetYChange.append(2)
 
+# Bullet
+bulletImg = pygame.image.load("assets/bullet.png")
+bulletX = playerX
+bulletY = playerY
+bulletState = "ready"
+
 
 # Functions
 # Player
@@ -49,6 +55,12 @@ def player(x, y):
 
 def target(x, y, i):
     screen.blit(targetImg[i], (x, y))
+
+
+def fireBullet(x, y):
+    global bulletState
+    bulletState = "fire"
+    screen.blit(bulletImg, (x+16, y+10))
 
 
 # Loop
@@ -69,6 +81,8 @@ while running:
                 playerXChange = -playerXSpeed
             if event.key == pygame.K_RIGHT:
                 playerXChange = playerXSpeed
+            if event.key == pygame.K_SPACE:
+                fireBullet(bulletX, bulletY)
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
