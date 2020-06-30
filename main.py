@@ -1,4 +1,5 @@
 import pygame
+import random
 
 # Window size
 (width, height) = (800, 600)
@@ -21,12 +22,21 @@ playerY = 480
 playerXSpeed = 1
 playerXChange = 0
 
+# Target
+targetImg = pygame.image.load("assets/target.png")
+targetX = random.randint(0,735)
+targetY = random.randint(50, 150)
+
+
 # Functions
 # Player
 
 
 def player(x, y):
-    screen.blit(playerImg, (x, y))
+  screen.blit(playerImg, (x, y))
+
+def target(x, y):
+  screen.blit(targetImg, (x, y))
 
 
 # Loop
@@ -55,6 +65,9 @@ while running:
     # Player move update
     playerX += playerXChange
     player(playerX, playerY)
+
+    # Target move update
+    target(targetX, targetY)
 
     # Update screen
     pygame.display.update()
