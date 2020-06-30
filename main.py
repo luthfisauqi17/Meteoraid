@@ -23,10 +23,17 @@ playerXSpeed = 1
 playerXChange = 0
 
 # Target
-targetImg = pygame.image.load("assets/target.png")
-targetX = random.randint(0,735)
-targetY = random.randint(50, 150)
-targetYChange = 1
+targetImg = []
+targetX = []
+targetY = []
+targetYChange = []
+numOfTarget = 7
+
+for i in range(numOfTarget):
+  targetImg.append(pygame.image.load("assets/target.png"))
+  targetX.append(random.randint(0,735))
+  targetY.append(random.randint(50, 150))
+  targetYChange.append(1)
 
 
 # Functions
@@ -36,8 +43,8 @@ targetYChange = 1
 def player(x, y):
   screen.blit(playerImg, (x, y))
 
-def target(x, y):
-  screen.blit(targetImg, (x, y))
+def target(x, y, i):
+  screen.blit(targetImg[i], (x, y))
 
 
 # Loop
@@ -74,8 +81,10 @@ while running:
     player(playerX, playerY)
 
     # Target move update
-    targetY += targetYChange
-    target(targetX, targetY)
+
+    for i in range(numOfTarget):
+      targetY[i] += targetYChange[i]
+      target(targetX[i], targetY[i], i)
 
     # Update screen
     pygame.display.update()
