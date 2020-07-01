@@ -1,5 +1,7 @@
 import pygame
 import random
+import math
+
 
 # Window size
 (width, height) = (800, 600)
@@ -16,6 +18,9 @@ pygame.display.set_caption("Meteoraid")
 # Set window game icon
 gameIcon = pygame.image.load("assets/icon.png")
 pygame.display.set_icon(gameIcon)
+
+# Score
+scoreValue = 0
 
 # Characters
 # Player
@@ -35,7 +40,7 @@ numOfTarget = 3
 for i in range(numOfTarget):
     targetImg.append(pygame.image.load("assets/target.png"))
     targetX.append(random.randint(0, 735))
-    targetY.append(random.randint(25, 150))
+    targetY.append(random.randint(15, 50))
     targetYChange.append(2)
 
 # Bullet
@@ -62,6 +67,16 @@ def fireBullet(x, y):
     global bulletState
     bulletState = "fire"
     screen.blit(bulletImg, (x+16, y+10))
+
+# Collsion detection
+
+
+def isCollided(x1, y1, x2, y2):
+    d = math.sqrt(math.pow(x2-x1, 2) + math.pow(y2-y1, 2))
+    if d <= 27:
+        return True
+    else:
+        return False
 
 
 # Loop
@@ -105,9 +120,20 @@ while running:
     for i in range(numOfTarget):
         targetY[i] += targetYChange[i]
 
-        if targetY[i] >= 600:
+        bulletTargetCollision = isCollided(
+            targetX[i], targetY[i], bulletX, bulletY)
+
+        if bulletTargetCollision:
+            bulletY = playerY
+            bulletState = "ready"
             targetX[i] = random.randint(0, 735)
             targetY[i] = random.randint(25, 150)
+            scoreValue += 1
+            print(scoreValue)
+
+        if targetY[i] >= 600:
+            targetX[i] = random.randint(0, 735)
+            targetY[i] = random.randint(15, 50)
 
         target(targetX[i], targetY[i], i)
 
