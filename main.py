@@ -2,7 +2,7 @@ import pygame
 import random
 import math
 
-# Initialization 
+# Initialization
 pygame.init()
 
 # Window size
@@ -152,7 +152,6 @@ while running:
     if bulletState is "fire":
         fireBullet(bulletX, bulletY)
         bulletY -= bulletYChange
-
 
     # Show score
     showScore(textX, textY)

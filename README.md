@@ -2,6 +2,9 @@
 
 Meteoraid is a game created using Pygame library. In this game, player have to shoot meteoroid as many as possible in order to get score. Do not touch the meteoroid, otherwise you will be dead and game over.
 
+### Overview
+![Screenshot1](/screenshots/meteoraid1.png)
+
 ### Technology used
 1. Python3 -> https://www.python.org/downloads/
 2. Visual Studio Code https://code.visualstudio.com/
